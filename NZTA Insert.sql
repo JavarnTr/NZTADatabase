@@ -1,0 +1,1 @@
+Insert into Driver(driverid, name, dob, phone, email, address) Values (1, 'Javarn', 14/01/2003, 021582945, 'random@gmail.com', 'house');
