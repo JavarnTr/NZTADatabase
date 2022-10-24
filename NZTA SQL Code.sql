@@ -257,3 +257,18 @@ Values (1, '2021-12-15', 'Fail', 'Full', 1, 1, 1),
 		(8, '2012-11-08', 'Pass', 'Full', 8, 8, 8),
 		(9, '2022-09-12', 'Pass', 'Restricted', 9, 9, 9),
 		(10, '2018-11-03', 'Pass', 'Learners', 10, 10, 10);
+		
+CREATE VIEW warrants as
+	SELECT driver.driverid, name, model, make, fueltype, expiry
+	FROM vehicle
+	INNER JOIN driver on driver.driverid = vehicle.driverid
+	INNER JOIN warrant_of_fitness on warrant_of_fitness.vehicleid = vehicle.vehicleid
+	WHERE fueltype = 'Electric';
+	
+CREATE VIEW penalties as
+	SELECT driver.driverid, name, reason,  model, make, amount, paydate 
+	FROM driver
+	INNER JOIN penalty on penalty.driverid = driver.driverid
+	INNER JOIN vehicle on vehicle.driverid = driver.driverid
+	WHERE reason = 'Speeding'
+	ORDER BY amount asc;
