@@ -25,4 +25,4 @@ CREATE VIEW penalties
 	INNER JOIN penalty on penalty.driverid = driver.driverid
 	INNER JOIN vehicle on vehicle.driverid = driver.driverid
 	WHERE reason = 'Speeding'
-	ORDER BY amount asc
+	ORDER BY amount asc;
