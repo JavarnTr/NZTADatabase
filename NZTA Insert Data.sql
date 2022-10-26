@@ -1,129 +1,3 @@
--- Reset tables
-Drop Table if exists Driver Cascade;
-Drop Table if exists Licence Cascade;
-Drop Table if exists Vehicle Cascade;
-Drop Table if exists Government_Vehicle Cascade;
-Drop Table if exists Clean_Car Cascade;
-Drop Table if exists Payments Cascade;
-Drop Table if exists Warrant_of_Fitness Cascade;
-Drop Table if exists Registration Cascade;
-Drop Table if exists Penalty Cascade;
-Drop Table if exists Applicant Cascade;
-Drop Table if exists Instructor Cascade;
-Drop Table if exists Driver_Test Cascade;
-
-
--- Create tables
-Create Table Driver (
-	DriverID INT PRIMARY KEY,
-	Name VARCHAR(50),
-	DOB DATE,
-	Phone INT,
-	Email VARCHAR(50),
-	Address VARCHAR(50)
-);
-
-Create Table Licence (
-	LicenceID INT PRIMARY KEY,
-	Class VARCHAR(20),
-	IssueDate DATE,
-	Expiry DATE,
-	Conditions VARCHAR(200),
-	DriverID INT references Driver(DriverID)
-);
-
-Create Table Vehicle (
-	VehicleID INT PRIMARY KEY,
-	Model VARCHAR(20),
-	Make VARCHAR(20),
-	Colour VARCHAR(20),
-	FuelType VARCHAR(20),
-	ManufactureYear CHAR(4),
-	Class VARCHAR(20),
-	Conditions VARCHAR(50),
-	Country VARCHAR(20),
-	Value MONEY,
-	PurchaseDate DATE,
-	DriverID INT references Driver(DriverID)
-);
-
-Create Table Government_Vehicle (
-	GovernmentVehicleID INT PRIMARY KEY,
-	Purpose VARCHAR(20),
-	VehicleID INT references Vehicle(VehicleID)
-);
-
-Create Table Clean_Car (
-	CleanCarID INT PRIMARY KEY,
-	Emissions VARCHAR(30),
-	VehicleID INT references Vehicle(VehicleID)
-);
-
-Create Table Payments (
-	PaymentID INT PRIMARY KEY,
-	Reason VARCHAR(50),
-	Date DATE,
-	Amount MONEY,
-	DriverID INT references Driver(DriverID)
-);
-
-Create Table Warrant_of_Fitness (
-	WarrantID INT PRIMARY KEY,
-	IssueDate DATE,
-	Expiry DATE,
-	Cost MONEY,
-	Issues VARCHAR(100),
-	VehicleID INT references Vehicle(VehicleID),
-	PaymentID INT references Payments(PaymentID)
-);
-
-Create Table Registration (
-	RegistrationID INT PRIMARY KEY,
-	Date DATE,
-	Expiry DATE,
-	Cost MONEY,
-	VehicleID INT references Vehicle(VehicleID),
-	PaymentID INT references Payments(PaymentID)
-);
-
-Create Table Penalty (
-	PenaltyID INT PRIMARY KEY,
-	Reason VARCHAR(50),
-	Date DATE,
-	Amount MONEY,
-	PayDate DATE,
-	DriverID INT references Driver(DriverID),
-	PaymentID INT references Payments(PaymentID)
-);
-
-Create Table Applicant (
-	ApplicantID INT PRIMARY KEY,
-	DriverID INT references Driver(DriverID)
-);
-
-Create Table Instructor (
-	InstructorID INT PRIMARY KEY,
-	Name VARCHAR(30),
-	Phone INT,
-	Address VARCHAR(50)
-);
-
-Create Table Driver_Test (
-	TestID INT PRIMARY KEY,
-	Date DATE,
-	Result VARCHAR(100),
-	Type VARCHAR(20),
-	ApplicantID INT references Applicant(ApplicantID),
-	PaymentID INT references Payments(PaymentID),
-	InstructorID INT references Instructor(InstructorID)
-);
-
-Create Table Past_Owners (
-	DriverID INT PRIMARY KEY,
-	VehicleID INT,
-	SaleDate INT;
-)
-
 -- Insert sample data 
 Insert into Driver(driverid, name, dob, phone, email, address) 
 Values (1, 'Maria York', '2003-01-14', 021582945, 'newnewyork@gmail.com', '2531 Berry Street'),
@@ -149,17 +23,7 @@ Values (1, 'Class 1 Restricted', '2021-12-15', '2026-12-15', 'Cannot carry passe
 		(9, 'Class 1 Restricted', '2022-09-12', '2027-09-12', 'Cannot carry passengers unless accompanied by supervisor. Can only drive without supervisor between 5am and 10pm.', 9),
 		(10, 'Class 6 Learners', '2018-11-03', '2022-11-03', 'Must drive with an L plate. Cannot carry passengers.', 10);
 		 
-Insert into Vehicle(vehicleid, model, make, colour, fueltype, manufactureyear, class, conditions, country, value, purchasedate, driverid)
-Values (1, 'Toyota', 'Corolla', 'Red', 'Regular', '1995', 'Class 1', 'Faulty locks.', 'United States', '$1,500.00', '2009-07-20', 1), 
-		(2, 'Nissan', 'X-Trail', 'Navy Blue', 'Regular', '2018', 'Class 1', 'None', 'Japan', '$39,000.00', '2019-02-11', 2),
-		(3, 'Tesla', 'Model S', 'White', 'Electric', '2019', 'Class 1', 'None', 'United States', '$89,000.00', '2021-12-06', 3),
-		(4, 'Ford', 'Explorer', 'Blue', 'Regular', '2017', 'Class 1', 'Dent in driver-side door.', 'United States', '2017-09-01', '$32,000.00', 4),
-		(5, 'BMW', '3 Series', 'Black', 'Regular', '2012', 'Class 1', 'None', 'Mexico', '$12,000.00', '2014-08-23', 5),
-		(6, 'Toyota', 'RAV4', 'Red', 'Regular', '2015', 'Class 1', 'Chipped windshield', 'United States', '2020-03-04', '$11,000.00', 6),
-		(7, 'Suzuki', 'Swift', 'Yellow', 'Regular', '2009', 'Class 1', 'None', 'New Zealand', '$9,000.00', '2009-07-20', 7),
-		(8, 'Audi', 'e-tron', 'White', 'Electric', '2019', 'Class 1', 'None', 'Belgium', '$151,900', '2022-05-13', 8),
-		(9, 'Nissan', 'Pathfinder', 'Gray', 'Regular', '2014', 'Class 1', 'None', 'Japan', '$13,000.00', '2016-01-12', 9),
-		(10, 'Hyundai', 'Ioniq 5', 'Red', 'Electric', '2021', 'Class 1', 'None', 'South Korea', '$60,000.00', 10);
+
 		
 Insert into Government_Vehicle(governmentvehicleid, purpose, vehicleid)
 Values (1, 'Police', 1),
@@ -264,17 +128,14 @@ Values (1, '2021-12-15', 'Fail', 'Full', 1, 1, 1),
 		(9, '2022-09-12', 'Pass', 'Restricted', 9, 9, 9),
 		(10, '2018-11-03', 'Pass', 'Learners', 10, 10, 10);
 		
-CREATE VIEW warrants as
-	SELECT driver.driverid, name, model, make, fueltype, expiry
-	FROM vehicle
-	INNER JOIN driver on driver.driverid = vehicle.driverid
-	INNER JOIN warrant_of_fitness on warrant_of_fitness.vehicleid = vehicle.vehicleid
-	WHERE fueltype = 'Electric';
-	
-CREATE VIEW penalties as
-	SELECT driver.driverid, name, reason,  model, make, amount, paydate 
-	FROM driver
-	INNER JOIN penalty on penalty.driverid = driver.driverid
-	INNER JOIN vehicle on vehicle.driverid = driver.driverid
-	WHERE reason = 'Speeding'
-	ORDER BY amount asc;
+Insert into Past_Owners(driverid, vehicleid, saledate)
+Values (8, 1, '2009-07-20'),
+		(3, 2, '2019-02-11'),
+		(5, 3, '2021-12-06'),
+		(1, 4, '2017-09-01'),
+		(7, 5, '2014-08-23'),
+		(10, 6, '2020-03-04'),
+		(4, 7, '2011-09-08'),
+		(9, 8, '2022-05-13'),
+		(2, 9, '2016-01-12'),
+		(6, 10, '2021-11-28');
