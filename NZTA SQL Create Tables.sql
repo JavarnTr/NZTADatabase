@@ -121,6 +121,6 @@ Create Table Driver_Test (
 Create Table Past_Owners (
 	DriverID INT PRIMARY KEY,
 	VehicleID INT,
-	SaleDate INT
+	SaleDate DATE
 );
 

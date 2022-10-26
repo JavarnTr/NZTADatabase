@@ -23,7 +23,17 @@ Values (1, 'Class 1 Restricted', '2021-12-15', '2026-12-15', 'Cannot carry passe
 		(9, 'Class 1 Restricted', '2022-09-12', '2027-09-12', 'Cannot carry passengers unless accompanied by supervisor. Can only drive without supervisor between 5am and 10pm.', 9),
 		(10, 'Class 6 Learners', '2018-11-03', '2022-11-03', 'Must drive with an L plate. Cannot carry passengers.', 10);
 		 
-
+Insert into Vehicle(vehicleid, model, make, colour, fueltype, manufactureyear, class, conditions, country, value, purchasedate, driverid)
+Values (1, 'Toyota', 'Corolla', 'Red', 'Regular', '1995', 'Class 1', 'Faulty locks.', 'United States', '$1,500.00', '2009-07-20', 1), 
+		(2, 'Nissan', 'X-Trail', 'Navy Blue', 'Regular', '2018', 'Class 1', 'None', 'Japan', '$39,000.00', '2019-02-11', 2),
+		(3, 'Tesla', 'Model S', 'White', 'Electric', '2019', 'Class 1', 'None', 'United States', '$89,000.00', '2021-12-06', 3),
+		(4, 'Ford', 'Explorer', 'Blue', 'Regular', '2017', 'Class 1', 'Dent in driver-side door.', 'United States', '$32,000.00', '2017-09-01', 4),
+		(5, 'BMW', '3 Series', 'Black', 'Regular', '2012', 'Class 1', 'None', 'Mexico', '$12,000.00', '2014-08-23', 5),
+		(6, 'Toyota', 'RAV4', 'Red', 'Regular', '2015', 'Class 1', 'Chipped windshield', 'United States', '$11,000.00', '2020-03-04',  6),
+		(7, 'Suzuki', 'Swift', 'Yellow', 'Regular', '2009', 'Class 1', 'None', 'New Zealand', '$9,000.00', '2009-07-20', 7),
+		(8, 'Audi', 'e-tron', 'White', 'Electric', '2019', 'Class 1', 'None', 'Belgium', '$151,900', '2022-05-13', 8),
+		(9, 'Nissan', 'Pathfinder', 'Gray', 'Regular', '2014', 'Class 1', 'None', 'Japan', '$13,000.00', '2016-01-12', 9),
+		(10, 'Hyundai', 'Ioniq 5', 'Red', 'Electric', '2021', 'Class 1', 'None', 'South Korea', '$60,000.00', '2022-01-12', 10);
 		
 Insert into Government_Vehicle(governmentvehicleid, purpose, vehicleid)
 Values (1, 'Police', 1),
