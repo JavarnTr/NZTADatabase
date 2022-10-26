@@ -138,6 +138,7 @@ Values (1, '2021-12-15', 'Fail', 'Full', 1, 1, 1),
 		(9, '2022-09-12', 'Pass', 'Restricted', 9, 9, 9),
 		(10, '2018-11-03', 'Pass', 'Learners', 10, 10, 10);
 		
+
 Insert into Past_Owners(driverid, vehicleid, saledate)
 Values (8, 1, '2009-07-20'),
 		(3, 2, '2019-02-11'),
