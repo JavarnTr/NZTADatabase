@@ -11,7 +11,7 @@ Drop Table if exists Penalty Cascade;
 Drop Table if exists Applicant Cascade;
 Drop Table if exists Instructor Cascade;
 Drop Table if exists Driver_Test Cascade;
-
+Drop Table if exists Past_Owners Cascade;
 
 -- Create tables
 Create Table Driver (
@@ -121,6 +121,6 @@ Create Table Driver_Test (
 Create Table Past_Owners (
 	DriverID INT PRIMARY KEY,
 	VehicleID INT,
-	SaleDate INT;
-)
+	SaleDate INT
+);
 
