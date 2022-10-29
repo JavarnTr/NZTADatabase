@@ -25,6 +25,11 @@ from payments
 inner join driver on driver.driverid = payments.driverid
 where payments.driverid = 4
 
+COPY (select name, reason, amount, date
+from payments
+inner join driver on driver.driverid = payments.driverid
+where payments.driverid = 4) TO 'c:/tmp/test.csv' DELIMITER ',' CSV HEADER;
+
 --View that displays all vehicles that were/are owned by someone in the NZTA database. Entering a driverid of 1 returns all vehicles that have driverid 1 associated with them, whether that be from the vehicles table or past owners table.
 Create view vehicle_history as
     select model, make, manufactureyear, purchasedate, saledate
@@ -32,3 +37,19 @@ Create view vehicle_history as
     inner join past_owners on past_owners.vehicleid = vehicle.vehicleid
     inner join driver on driver.driverid = vehicle.vehicleid
     where past_owners.driverid = 1 or vehicle.driverid = 1
+
+
+
+
+CREATE OR REPLACE FUNCTION export_cities(file_name VARCHAR(255)) RETURNS void 
+  AS $$
+  DECLARE
+    select_stmt VARCHAR(500) := 'select name, payments.reason, amount, payments.date 
+from payments
+inner join driver on driver.driverid = payments.driverid
+where payments.driverid = 4';
+  BEGIN
+     EXECUTE('COPY (' || select_stmt || ') TO ' || QUOTE_LITERAL(C:\Users\javar) || ' CSV'); 
+  END;
+  $$
+  LANGUAGE plpgsql;
