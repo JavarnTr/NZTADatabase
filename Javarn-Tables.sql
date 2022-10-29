@@ -121,3 +121,8 @@ Create Table Past_Owners (
 	SaleDate DATE
 );
 
+Create Index name_index on driver(name);
+Create Index model_index on vehicle(model);
+Create Index make_index on vehicle(make);
+Create Index vehicleid_index on vehicle(vehicleid);
+Create Index driverid_index on driver(driverid);
