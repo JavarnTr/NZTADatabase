@@ -19,6 +19,12 @@ INNER JOIN vehicle on vehicle.vehicleid = registration.vehicleid
 INNER JOIN driver on driver.driverid = vehicle.driverid
 WHERE vehicle.vehicleid = 7;
 
+--Procedure to export all past payments
+select name, reason, amount, date
+from payments
+inner join driver on driver.driverid = payments.driverid
+where payments.driverid = 4
+
 --View that displays all vehicles that were/are owned by someone in the NZTA database. Entering a driverid of 1 returns all vehicles that have driverid 1 associated with them, whether that be from the vehicles table or past owners table.
 Create view vehicle_history as
     select model, make, manufactureyear, purchasedate, saledate

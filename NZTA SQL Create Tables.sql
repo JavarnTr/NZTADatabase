@@ -71,7 +71,6 @@ Create Table Warrant_of_Fitness (
 	WarrantID INT PRIMARY KEY,
 	IssueDate DATE,
 	Expiry DATE,
-	Cost MONEY,
 	Issues VARCHAR(100),
 	VehicleID INT references Vehicle(VehicleID),
 	PaymentID INT references Payments(PaymentID)
@@ -81,7 +80,6 @@ Create Table Registration (
 	RegistrationID INT PRIMARY KEY,
 	Date DATE,
 	Expiry DATE,
-	Cost MONEY,
 	VehicleID INT references Vehicle(VehicleID),
 	PaymentID INT references Payments(PaymentID)
 );
@@ -90,7 +88,6 @@ Create Table Penalty (
 	PenaltyID INT PRIMARY KEY,
 	Reason VARCHAR(50),
 	Date DATE,
-	Amount MONEY,
 	PayDate DATE,
 	DriverID INT references Driver(DriverID),
 	PaymentID INT references Payments(PaymentID)
