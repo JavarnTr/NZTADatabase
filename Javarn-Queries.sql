@@ -1,3 +1,4 @@
+--Show warrant of fitness expiry for electric vehicles.
 SELECT driver.driverid, name, model, make, fueltype, expiry
 FROM vehicle
 INNER JOIN driver on driver.driverid = vehicle.driverid
